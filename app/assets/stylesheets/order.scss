@@ -1,0 +1,15 @@
+.order {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .row {
+    width: 300;
+    border: 1px solid #ccc;
+  }
+
+  &:hover {
+    border-color: #999;
+  }
+}

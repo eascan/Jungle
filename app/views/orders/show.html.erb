@@ -4,10 +4,23 @@
     <h1>Order #<%= @order.id %></h1>
   </header>
 
-  <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
-  </div>
+  <div class="order-summary jumbotron" >
+    <h2 style="margin-bottom: 50px">Thank you for your order!</h2>
+ 
+    <div class="order">
+      <% LineItem.where(order_id: @order.id).each do |order| %>
+        <% order_product = Product.find_by(id: order.product_id) %>
+        <% amount = order.quantity %>
 
+        <%= render 'item', product: order_product, quantity: amount %>
+      <% end %>
+    </div>
+    <div style="margin-top:50px">  
+      <h3>Here is your order toal: <%= humanized_money_with_symbol @order.total %></h3>
+        <br>
+      Please find your receipt in your mail at <%= @order.email %>
+      </div>
+  </div>
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
